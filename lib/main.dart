@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'features/characters/presentation/character_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,15 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Rick & Morty',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Rick & Morty')),
-        body: const Center(
-          child: Text('hi'),
-        ),
-      ),
+      home: CharacterListScreen(),
     );
   }
 }

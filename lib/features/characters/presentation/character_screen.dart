@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/character_api.dart';
 import '../data/character.dart';
+import 'character_detail_screen.dart';
 
 class CharacterListScreen extends StatefulWidget {
   const CharacterListScreen({super.key});
@@ -53,6 +54,14 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   leading: Image.network(c.image),
                   title: Text(c.name),
                   subtitle: Text("${c.species} • ${c.status}"),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CharacterDetailScreen(character: c),
+                      ),
+                    );
+                  },
                 );
               },
             ),

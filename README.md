@@ -39,7 +39,7 @@ Tracked events:
 ---
 
 ## Project Structure
-
+```
 lib/
 ├── features/
 │ └── characters/
@@ -56,3 +56,4 @@ lib/
 │
 ├── app_theme.dart
 ├── main.dart
+```

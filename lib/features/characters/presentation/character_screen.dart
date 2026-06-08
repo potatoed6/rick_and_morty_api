@@ -61,23 +61,33 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   leading: Image.network(c.image),
                   title: Text(c.name),
                   subtitle: Text("${c.species} • ${c.status}"),
-                    trailing: FutureBuilder<bool>(
-                      future: favCache.isFavorite(c.id),
-                      builder: (context, snapshot) {
-                        final isFav = snapshot.data ?? false;
 
-                        return IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: isFav ? Colors.red : Colors.grey,
-                          ),
-                          onPressed: () async {
-                            await favCache.toggleFavorite(c.id);
-                            setState(() {});
-                          },
-                        );
-                      },
-                    ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CharacterDetailScreen(character: c),
+                      ),
+                    );
+                  },
+
+                  trailing: FutureBuilder<bool>(
+                    future: favCache.isFavorite(c.id),
+                    builder: (context, snapshot) {
+                      final isFav = snapshot.data ?? false;
+
+                      return IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          color: isFav ? Colors.red : Colors.grey,
+                        ),
+                        onPressed: () async {
+                          await favCache.toggleFavorite(c.id);
+                          setState(() {});
+                        },
+                      );
+                    },
+                  ),
                 );
               },
             ),

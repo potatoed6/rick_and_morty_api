@@ -3,6 +3,7 @@ import '../data/character_api.dart';
 import '../data/character.dart';
 import 'character_detail_screen.dart';
 import '../data/favs_cache.dart';
+import '../data/character_cache.dart';
 
 class CharacterListScreen extends StatefulWidget {
   const CharacterListScreen({super.key});
@@ -14,6 +15,7 @@ class CharacterListScreen extends StatefulWidget {
 class _CharacterListScreenState extends State<CharacterListScreen> {
   final api = CharacterApi();
   final favCache = FavoritesCache();
+  final cache = CharacterCache();
   late Future<List<Character>> characters;
 
   @override
@@ -24,8 +26,18 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
 
   Future<void> _refresh() async {
     setState(() {
-      characters = api.fetchCharacters();
+      characters = _loadCharacters();
     });
+  }
+
+  Future<List<Character>> _loadCharacters() async {
+    try {
+      final data = await api.fetchCharacters();
+      await cache.saveCharacters(data);
+      return data;
+    } catch (e) {
+      return await cache.getCharacters();
+    }
   }
 
   void refresh() {
